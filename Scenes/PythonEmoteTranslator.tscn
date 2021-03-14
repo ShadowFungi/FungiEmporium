@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Python/EmoteTranslator.py" type="Script" id=1]
+
+
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.471924
+margin_right = 0.471924
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.376563
+anchor_top = 0.444444
+anchor_right = 0.623438
+anchor_bottom = 0.555556
+margin_bottom = -7.62939e-06
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Script/GDscript/Overlay.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Images/BotGroundOverlay.png" type="Texture" id=3]
+
+
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 51.0978, 16.5639 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 160.113, 3.9395 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5.11819, 89.6755 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 30.4467 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 59.2395, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 19.847, 8.33847 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 10, 18.6385 )
+
+[node name="Overlay" type="Control"]
+show_behind_parent = true
+light_mask = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -90.0
+margin_right = 160.0
+margin_bottom = 90.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 159.999, 90.0075 )
+
+[node name="BotGroundOverlay" type="Sprite" parent="KinematicBody2D"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -108.896, 73.4741 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 90 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D 5" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, -90 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D 3" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 160, 0 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D 4" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -159.999, 0 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D 6" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -30.8817, 91.8279 )
+rotation = 4.97418
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D 7" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 55.0921, 93.1784 )
+rotation = -0.113552
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D 8" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 122.368, 79.5706 )
+rotation = -0.52699
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D 9" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 145.146, 64.5154 )
+rotation = 0.523598
+shape = SubResource( 7 )
+
+[node name="Character" parent="." instance=ExtResource( 2 )]
+position = Vector2( 175.464, 160.196 )
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 10.0
+autostart = true

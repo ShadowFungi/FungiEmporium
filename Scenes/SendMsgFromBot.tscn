@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Script/GDscript/timer.gd" type="Script" id=1]
+[ext_resource path="res://Script/GDscript/Button.gd" type="Script" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.432813
+anchor_top = 0.553332
+anchor_right = 0.567187
+anchor_bottom = 0.664443
+text = "send"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+anchor_left = 0.0382813
+anchor_top = 0.247729
+anchor_right = 0.961719
+anchor_bottom = 0.381063
+placeholder_text = "bot message"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SporeTimer" type="Timer" parent="."]
+script = ExtResource( 1 )
