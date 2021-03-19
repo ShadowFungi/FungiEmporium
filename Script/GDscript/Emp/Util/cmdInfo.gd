@@ -1,11 +1,11 @@
 extends Reference
 
-class_name CommandInfo
+class_name Command_Info
 
 
-var SporesNum : Spore_Count
+var SporesNum : SporeCount
 
-var sendeeData : Sender_Data
+var sendeeData : SendData
 
 var Command : String
 

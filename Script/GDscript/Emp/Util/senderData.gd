@@ -1,6 +1,6 @@
 extends Reference
 
-class_name Sender_Data
+class_name SendData
 
 
 var Message : String

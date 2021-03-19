@@ -1,6 +1,6 @@
 extends Node
 
-class_name Image_Cache
+class_name ImageCache
 
 
 signal BadgeMappingAvailable
@@ -35,13 +35,13 @@ func _ready() -> void:
 
 	if(DiskCache):
 
-		for cache_dir in CachedImages.keys():
+		for cacheDir in CachedImages.keys():
 
-			CachedImages[cache_dir] = {}
+			CachedImages[cacheDir] = {}
 
-			dir.make_dir_recursive(DiskCachePath + "/" + cache_dir)
+			dir.make_dir_recursive(DiskCachePath + "/" + cacheDir)
 			
-			dir.open(DiskCachePath + "/" + cache_dir)
+			dir.open(DiskCachePath + "/" + cacheDir)
 
 			dir.list_dir_begin(true)
 
@@ -65,7 +65,7 @@ func _ready() -> void:
 
 					CacheMutex.lock()
 
-					CachedImages[cache_dir][current.get_basename()] = img_texture
+					CachedImages[cacheDir][current.get_basename()] = img_texture
 
 					CacheMutex.unlock()
 

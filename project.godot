@@ -10,54 +10,49 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "CommandInfo",
-"language": "GDScript",
-"path": "res://Script/GDscript/Emp/Util/cmdInfo.gd"
-}, {
-"base": "Reference",
-"class": "Command_Data",
+"class": "CommandData",
 "language": "GDScript",
 "path": "res://Script/GDscript/Emp/Util/cmdData.gd"
 }, {
+"base": "Reference",
+"class": "Command_Info",
+"language": "GDScript",
+"path": "res://Script/GDscript/Emp/Util/cmdInfo.gd"
+}, {
 "base": "Node",
-"class": "Image_Cache",
+"class": "Emp",
+"language": "GDScript",
+"path": "res://Script/GDscript/Emp/EmpNode.gd"
+}, {
+"base": "Node",
+"class": "ImageCache",
 "language": "GDScript",
 "path": "res://Script/GDscript/Emp/Util/imageCache.gd"
 }, {
 "base": "Reference",
-"class": "Sender_Data",
+"class": "SendData",
 "language": "GDScript",
 "path": "res://Script/GDscript/Emp/Util/senderData.gd"
 }, {
 "base": "Timer",
-"class": "Spore_Count",
+"class": "SporeCount",
 "language": "GDScript",
 "path": "res://Script/GDscript/timer.gd"
-}, {
-"base": "Node",
-"class": "Twic",
-"language": "GDScript",
-"path": "res://Script/GDscript/Emp/EmpNode.gd"
-}, {
-"base": "Reference",
-"class": "amazon_Price",
-"language": "GDScript",
-"path": "res://Script/GDscript/amazonPrice.gd"
 } ]
 _global_script_class_icons={
-"CommandInfo": "",
-"Command_Data": "",
-"Image_Cache": "",
-"Sender_Data": "",
-"Spore_Count": "",
-"Twic": "",
-"amazon_Price": ""
+"CommandData": "",
+"Command_Info": "",
+"Emp": "",
+"ImageCache": "",
+"SendData": "",
+"SporeCount": ""
 }
 
 [application]
 
 config/name="FungiEmporioum"
 run/main_scene="res://Scenes/SendMsgFromBot.tscn"
+config/use_custom_user_dir=true
 run/low_processor_mode=true
 boot_splash/fullsize=false
 boot_splash/use_filter=false

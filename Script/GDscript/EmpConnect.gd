@@ -1,8 +1,12 @@
-extends Twic
+extends Emp
 
 onready var time = get_node("/root/Control/SporeTimer/")
 
-export(String) var ChannelName
+export(String) var Account = ""
+
+export(String) var ChannelName = ""
+
+export(String) var OauthToken = ""
 
 func _ready() -> void:
 	
@@ -22,7 +26,7 @@ func _ready() -> void:
 	
 	  return
 	
-	JoinChannel("ShadowFungi")
+	JoinChannel(ChannelName)
 
 	AddCommand("!spores", self, "SPORES")
 	
@@ -58,27 +62,27 @@ func _ready() -> void:
 
 	Whisper("TEST", "<channel_name>")
 
-func command_test(_cmd_info : CommandInfo) -> void:
+func command_test(_cmd_info : Command_Info) -> void:
 	
 	print("A")
 
-func hello_world(_cmd_info : CommandInfo) -> void:
+func hello_world(_cmd_info : Command_Info) -> void:
 	
 	Chat("HELLO WORLD!")
 
-func streamer_only(_cmd_info : CommandInfo) -> void:
+func streamer_only(_cmd_info : Command_Info) -> void:
 	
 	Chat("Streamer command executed")
 
-func no_permission(_cmd_info : CommandInfo) -> void:
+func no_permission(_cmd_info : Command_Info) -> void:
 	
 	Chat("NO PERMISSION!")
 
-func greet(_cmd_info : CommandInfo, ArgAry : PoolStringArray) -> void:
+func greet(_cmd_info : Command_Info, ArgAry : PoolStringArray) -> void:
 	
 	Chat("Greetings, " + ArgAry[0])
 
-func greet_me(_cmd_info : CommandInfo) -> void:
+func greet_me(_cmd_info : Command_Info) -> void:
 	
 	Chat("Greetings, " + _cmd_info.sendeeData.Tags["display-name"] + "!")
 
@@ -104,7 +108,7 @@ func SPORES(_cmd_info : Command_Info) -> void:
 	
 	Time.SporeNum -= Time.SporeNum
 
-func Join(_cmd_info : Command_Info, SenderData : sender_Data) -> void:
+func Join(_cmd_info : Command_Info, SenderData : SendData) -> void:
 	
 	var UserName = SenderData.Usr
 	

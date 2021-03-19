@@ -1,5 +1,5 @@
 extends Node
-class_name Twic
+class_name Emp
 
 
 signal twitch_connected
@@ -24,6 +24,9 @@ signal cmd_no_permission(cmdName, sendeeData, cmdData, ArgAry)
 
 signal pong
 
+signal EmoteDownloaded(EmoteID)
+
+signal BadgeDownloaded(BadgeName)
 
 
 export(Array, String) var CommandPrefixes : Array = ["!"]
@@ -34,7 +37,7 @@ export(bool) var GetImages : bool = false
 
 export(bool) var DiskCache : bool = false
 
-export(String, FILE) var CachePath = "user://gift/cache"
+export(String, FILE) var CachePath = "user://Emp/cache"
 
 var websocket : WebSocketClient = WebSocketClient.new()
 
@@ -50,7 +53,7 @@ var channels : Dictionary = {}
 
 var commands : Dictionary = {}
 
-var imageCache : Image_Cache
+var imageCache : ImageCache
 
 onready var Time = get_node("/root/Control/SporeTimer/")
 
@@ -98,7 +101,7 @@ func _ready() -> void:
 	
 	if(GetImages):
 		
-		imageCache = Image_Cache.new(DiskCache, CachePath)
+		imageCache = ImageCache.new(DiskCache, CachePath)
 		
 		add_child(imageCache)
 
@@ -218,7 +221,7 @@ func AddCommand(cmdName : String, Instance : Object, InstanceFunc : String, MaxA
 
 	FuncRf.set_function(InstanceFunc)
 
-	commands[cmdName] = Command_Data.new(FuncRf, SporeNum, PermissionLevel, MaxArgs, MinArgs, Where)
+	commands[cmdName] = CommandData.new(FuncRf, SporeNum, PermissionLevel, MaxArgs, MinArgs, Where)
 
 
 func RemoveCommand(cmdName : String) -> void:
@@ -289,9 +292,9 @@ func HandleMessage(Message : String, Tags : Dictionary) -> void:
 			
 		"PRIVMSG":
 			
-			var sendeeData : sender_Data = sender_Data.new(user_regex.search(Msg[0]).get_string(), Msg[2], Tags)
+			var sendeeData : SendData = SendData.new(user_regex.search(Msg[0]).get_string(), Msg[2], Tags)
 			
-			var SporeNum : Spore_Number = Time
+			var SporeNum : SporeCount = Time
 			
 			handle_command(sendeeData, SporeNum, Msg)
 			
@@ -299,23 +302,23 @@ func HandleMessage(Message : String, Tags : Dictionary) -> void:
 			
 			if(GetImages):
 				
-				if(!imageCache.badge_map.has(tags["room-id"])):
+				if(!imageCache.badge_map.has(Tags["room-id"])):
 					
-					imageCache.get_badge_mappings(tags["room-id"])
+					imageCache.get_badge_mappings(Tags["room-id"])
 					
-				for emote in tags["emotes"].split("/", false):
+				for Emote in Tags["Emotes"].split("/", false):
 					
-					imageCache.get_emote(emote.split(":")[0])
+					imageCache.get_emote(Emote.split(":")[0])
 					
-				for badge in tags["badges"].split(",", false):
+				for Badge in Tags["Badges"].split(",", false):
 					
-					imageCache.get_badge(badge, tags["room-id"])
+					imageCache.get_badge(Badge, Tags["room-id"])
 
 		"WHISPER":
 			
-			var sendeeData : sender_Data = sender_Data.new(user_regex.search(Msg[0]).get_string(), Msg[2], Tags)
+			var sendeeData : SendData = SendData.new(user_regex.search(Msg[0]).get_string(), Msg[2], Tags)
 			
-			var SporeNum : Spore_Number = Spore_Number.SporeNum
+			var SporeNum : SporeCount = SporeCount.SporeNum
 			
 			handle_command(sendeeData, SporeNum, Msg, true)
 			
@@ -330,13 +333,13 @@ func HandleMessage(Message : String, Tags : Dictionary) -> void:
 			emit_signal("unhandled_message", Message, Tags)
 
 
-func handle_command(sendeeData : Sender_Data, SporeNum : Spore_Count, Msg : PoolStringArray, Whisper : bool = false) -> void:
+func handle_command(sendeeData : SendData, SporeNum : SporeCount, Msg : PoolStringArray, Whisper : bool = false) -> void:
 	
 	if(CommandPrefixes.has(Msg[3].substr(1, 1))):
 		
 		var command : String  = Msg[3].right(2)
 		
-		var cmd_data : Command_Data = commands.get(command)
+		var cmd_data : CommandData = commands.get(command)
 		
 		if(cmd_data):
 			

@@ -1,11 +1,11 @@
 extends Reference
 
-class_name Command_Data
+class_name CommandData
 
 
 var FuncRf : FuncRef
 
-var SporesCount : Spore_Count
+var SporesCount : SporeCount
 
 var PermissionLevel : int
 
@@ -16,7 +16,7 @@ var MinArgs : int
 var Where : int
 
 
-func _init(fRef : FuncRef, SprCnt : Spore_Count, PermLvl : int, MxArgs : int, MnArgs : int, Whr : int):
+func _init(fRef : FuncRef, SprCnt : SporeCount, PermLvl : int, MxArgs : int, MnArgs : int, Whr : int):
 	
 	FuncRf = fRef
 	

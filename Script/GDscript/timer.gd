@@ -1,6 +1,6 @@
 extends Timer
 
-class_name Spore_Count
+class_name SporeCount
 
 
 var SporeNum = 0
