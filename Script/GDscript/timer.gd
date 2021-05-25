@@ -24,7 +24,9 @@ func _on_SporeTimer_timeout():
 	elif SporeNum < 30000000000:
 		
 		SporeNum += rand_range(1, 500)
+		
+	var Spores = floor(SporeNum)
 	
-	print(SporeNum)
+	print(Spores)
 	
 	start()

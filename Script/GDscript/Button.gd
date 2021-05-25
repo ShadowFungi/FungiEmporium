@@ -1,7 +1,5 @@
 extends Button
 
 func _pressed():
-	
-	$"../Emp".Chat($"../LineEdit".text)
-	
+	$"../Gift".chat($"../LineEdit".text)
 	$"../LineEdit".text = ""

@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Script/GDscript/timer.gd" type="Script" id=1]
-[ext_resource path="res://Script/GDscript/Button.gd" type="Script" id=2]
-[ext_resource path="res://Script/GDscript/SaveTextToJson.gd" type="Script" id=3]
-[ext_resource path="res://Script/GDscript/EmpConnect.gd" type="Script" id=4]
+[ext_resource path="res://Script/GDscript/OAuthSave.gd" type="Script" id=2]
+[ext_resource path="res://Script/GDscript/JoinedChannel.gd" type="Script" id=3]
+[ext_resource path="res://Script/GDscript/BotNameSave.gd" type="Script" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+func _pressed():
+	
+	$\"../Emp\".chat($\"../LineEdit\".text)
+	
+	$\"../LineEdit\".text = \"\"
+"
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -14,44 +25,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BotMessage" type="LineEdit" parent="."]
-anchor_left = 0.00147476
-anchor_top = 0.585808
-anchor_right = 0.8546
-anchor_bottom = 0.719141
-margin_top = 42.8199
-margin_bottom = 42.8199
-placeholder_text = "Bot Message"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SendMsgButton" type="Button" parent="BotMessage"]
-anchor_left = 1.00735
-anchor_top = 0.0943507
-anchor_right = 1.16486
-anchor_bottom = 0.927684
-text = "Send"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SporeTimer" type="Timer" parent="."]
-script = ExtResource( 1 )
-
-[node name="OauthToken" type="LineEdit" parent="."]
-anchor_top = 0.310805
+[node name="ChannelToJoin" type="LineEdit" parent="."]
 anchor_right = 0.853125
-anchor_bottom = 0.444138
-margin_top = 44.2357
-margin_bottom = 44.2357
-placeholder_text = "Oauth Token"
+anchor_bottom = 0.133333
+placeholder_text = "Channel To Join"
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="SaveOauthButton" type="Button" parent="OauthToken"]
+[node name="SaveChannelButton" type="Button" parent="ChannelToJoin"]
 anchor_left = 1.00733
 anchor_top = 0.0833333
 anchor_right = 1.16484
@@ -62,12 +45,11 @@ __meta__ = {
 }
 
 [node name="UserName" type="LineEdit" parent="."]
-anchor_top = 0.054246
+anchor_top = 0.175282
 anchor_right = 0.853125
-anchor_bottom = 0.187579
-margin_top = 44.2357
-margin_bottom = 44.2357
+anchor_bottom = 0.308615
 placeholder_text = "Bot Username (must have an account)"
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -82,28 +64,52 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ChannelToJoin" type="LineEdit" parent="."]
-margin_top = 9.0
-margin_right = 273.0
-margin_bottom = 33.0
-placeholder_text = "Channel To Join"
+[node name="OauthToken" type="LineEdit" parent="."]
+anchor_top = 0.35701
+anchor_right = 0.853125
+anchor_bottom = 0.490344
+placeholder_text = "Oauth Token"
+script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
-[node name="SaveChannelButton" type="Button" parent="ChannelToJoin"]
-margin_left = 275.0
-margin_top = 2.0
-margin_right = 318.0
-margin_bottom = 22.0
+[node name="SaveOauthButton" type="Button" parent="OauthToken"]
+anchor_left = 1.00733
+anchor_top = 0.0833333
+anchor_right = 1.16484
+anchor_bottom = 0.916667
 text = "Save"
-script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="BotMessage" type="LineEdit" parent="."]
+anchor_left = 0.00147486
+anchor_top = 0.533727
+anchor_right = 0.8546
+anchor_bottom = 0.667061
+margin_bottom = -6.10352e-05
+placeholder_text = "Bot Message"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SendMsgButton" type="Button" parent="BotMessage"]
+anchor_left = 1.00735
+anchor_top = 0.0943507
+anchor_right = 1.16486
+anchor_bottom = 0.927684
+text = "Send"
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-JsonDir = null
 
-[node name="Connections" type="Node" parent="."]
-script = ExtResource( 4 )
+[node name="SporeTimer" type="Timer" parent="."]
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="ChannelToJoin/SaveChannelButton" to="ChannelToJoin" method="_pressed"]
+[connection signal="pressed" from="UserName/SaveUserButton" to="UserName" method="_on_SaveUserButton_pressed"]
+[connection signal="pressed" from="OauthToken/SaveOauthButton" to="OauthToken" method="_pressed"]
 [connection signal="timeout" from="SporeTimer" to="SporeTimer" method="_on_SporeTimer_timeout"]
-[connection signal="text_entered" from="ChannelToJoin" to="ChannelToJoin/SaveChannelButton" method="_on_ChannelToJoin_text_entered"]
