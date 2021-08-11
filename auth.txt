@@ -1,3 +1,3 @@
-sporesbot
-oauth:o9dldz9dwa6k1r8pzhsa2z4dz1z49x
-shadowfungi
+Bot Name Goes Here
+Oauth Goes Here
+Channel Name Goes Here
