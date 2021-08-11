@@ -1,3 +1,6 @@
-the license for godot-python can be found in the "Godot-pyhton" folder
+[screenshot]: https://raw.githubusercontent.com/awkwardpolygons/viewport-spy/master/screenshots/screenshot.png "ViewportSpy screenshot"
+# ViewportSpy
+Adds some UI to the inspector so you can see what the selected viewport is rendering.
 
-this project uses the 
+![][screenshot]
+

@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="SpawnPoint" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -7.5
+margin_top = -7.5
+margin_right = 7.5
+margin_bottom = 7.5
+color = Color( 0.447059, 0.117647, 0.741176, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}

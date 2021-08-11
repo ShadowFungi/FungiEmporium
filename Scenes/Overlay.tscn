@@ -1,97 +1,84 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Script/GDscript/Overlay.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Fungling/Fungling.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Images/Sprites/Buttons/ArrowButton.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=2]
 
-[sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 62.7492, 8.87885, 7.77237, 35.885, 62.7492, 63.8557 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 180.139, 10 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 65.6427, 70.6072, 0, 35.885, 66.125, 0 )
-
-[sub_resource type="ConcavePolygonShape2D" id=3]
-segments = PoolVector2Array( 73, 78, 1, 78, 1, 78, 1, 1, 1, 1, 73, 1, 73, 1, 73, 78 )
-
-[sub_resource type="TileSet" id=4]
-0/name = "ArrowButton.png 0"
-0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 2, -2, 71, 84 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/occluder = SubResource( 1 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 2 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 2 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-
-[node name="Overlay" type="Control"]
-show_behind_parent = true
-light_mask = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = -90.0
-margin_right = 160.0
-margin_bottom = 90.0
-rect_pivot_offset = Vector2( 348.458, 166.381 )
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 40.0
+margin_top = -64.0
+margin_right = 280.0
+margin_bottom = -24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_bottom = 40.0
+
+[node name="SpawnPoint" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 8, 24 )
+
+[node name="SpawnPoint 2" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 32, 8 )
+
+[node name="SpawnPoint 3" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 72, 24 )
+
+[node name="SpawnPoint 4" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 104, 8 )
+
+[node name="SpawnPoint 5" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 128, 32 )
+
+[node name="SpawnPoint 6" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 168, 16 )
+
+[node name="SpawnPoint 7" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 200, 24 )
+
+[node name="SpawnPoint 8" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+position = Vector2( 232, 32 )
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 10.0
 autostart = true
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = -90.0
-margin_right = 160.0
-margin_bottom = 90.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Floor StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 159.872, 169.939 )
 
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 320, 180 )
-transparent_bg = true
-handle_input_locally = false
-usage = 0
-render_target_update_mode = 3
-gui_disable_input = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor StaticBody2D"]
+position = Vector2( 0, 8.62173 )
+shape = SubResource( 1 )
 
-[node name="Fungling" parent="." instance=ExtResource( 2 )]
-position = Vector2( 112.686, 91.9661 )
+[node name="Roof StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 159.872, -120 )
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 4 )
-cell_size = Vector2( 68, 74 )
-show_collision = true
-format = 1
-tile_data = PoolIntArray( 131072, -1073741824, 0, 131073, -1073741824, 0, 131074, -1073741824, 0, 131075, -1073741824, 0, 131076, -1073741824, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof StaticBody2D"]
+position = Vector2( 0, 8.62173 )
+shape = SubResource( 1 )
+
+[node name="wall StaticBody2D left" type="StaticBody2D" parent="."]
+position = Vector2( -0.287704, 32 )
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall StaticBody2D left"]
+shape = SubResource( 1 )
+
+[node name="wall StaticBody2D right" type="StaticBody2D" parent="."]
+position = Vector2( 321.092, 32 )
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall StaticBody2D right"]
+shape = SubResource( 1 )

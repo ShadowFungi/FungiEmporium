@@ -1,7 +1,12 @@
-extends Viewport
+extends Control
 
+
+onready var viewport = get_tree().get_root()
 
 func _ready():
 	
-	set_size_override(true, Vector2(318, 496))
+	viewport.set_size_override(true, Vector2(318, 496))
+	
+	OS.set_window_size(Vector2(318, 496))
+	
 	
