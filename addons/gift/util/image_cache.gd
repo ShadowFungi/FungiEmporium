@@ -1,16 +1,19 @@
 extends Resource
+
 class_name ImageCache
 
 enum RequestType {
 	EMOTE,
 	BADGE,
-	BADGE_MAPPING
+	BADGE_MAPPING,
+	PROFILE
 }
 
 var caches := {
 	RequestType.EMOTE: {},
 	RequestType.BADGE: {},
-	RequestType.BADGE_MAPPING: {}
+	RequestType.BADGE_MAPPING: {},
+	RequestType.PROFILE: {}
 }
 
 var queue := []
@@ -62,6 +65,8 @@ func start(params) -> void:
 				caches[RequestType.BADGE][entry.data[0]][entry.data[1]].create_from_image(img, 0)
 			elif entry.type == RequestType.EMOTE:
 				caches[RequestType.EMOTE][entry.data[0]].create_from_image(img, 0)
+			elif entry.type == RequestType.PROFILE:
+				caches[RequestType.PROFILE][entry.data[0]][entry.data[2]].create_from_image(img, 0)
 		yield(Engine.get_main_loop(), "idle_frame")
 
 # Gets badge mappings for the specified channel. Default: _global (global mappings)
@@ -135,6 +140,27 @@ func get_emote(emote_id : String, scale = "1.0") -> ImageTexture:
 		caches[RequestType.EMOTE][cachename] = texture
 	return caches[RequestType.EMOTE][cachename]
 
+func get_profile(user_id : String, data : SenderData, scale = "1.0") -> ImageTexture:
+	var texture : ImageTexture = ImageTexture.new()
+	var cachename : String = data.user + "_image_" + scale
+	var filename : String = cache_path + "/" + RequestType.keys()[RequestType.PROFILE] + "/" + cachename + ".png"
+	if !caches[RequestType.PROFILE].has(cachename):
+		if !disk_cache && file.file_exists(filename):
+			file.open(filename, File.READ)
+			var img : Image = Image.new()
+			img.load_png_from_buffer(file.get_buffer(file.get_len()))
+			texture.create_from_image(img)
+			file.close()
+	else:
+		mutex.lock()
+		queue.append(Entry.new(data.user + "/" + scale, RequestType.PROFILE, filename, [cachename]))
+		mutex.unlock()
+		var img = preload("res://addons/gift/placeholder.png")
+		texture.create_from_image(img)
+	texture.take_over_path(filename)
+	caches[RequestType.PROFILE][cachename] = texture
+	return caches[RequestType.PROFILE][cachename]
+
 func http_request(path : String, type : int) -> PoolByteArray:
 	var error := 0
 	var buffer = PoolByteArray()
@@ -149,6 +175,9 @@ func http_request(path : String, type : int) -> PoolByteArray:
 				path = "/badges/v1/" + path
 			else:
 				path = "/emoticons/v1/" + path
+		RequestType.PROFILE:
+			new_host = "https://api.twitch.tv/helix/users?login=" + SenderData.user
+			path = "/profile/v1/" + path
 	if (host != new_host):
 		error = http_client.connect_to_host(new_host, 443, true)
 		while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:

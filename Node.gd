@@ -1,6 +1,7 @@
 extends Control
 
-onready var SporeN = get_node("SporeTimer")
+
+var websocket := WebSocketClient.new()
 
 
 func chat_message(data : SenderData, msg : String) -> void:
@@ -29,6 +30,12 @@ func list(cmd_info : CommandInfo, arg_ary : PoolStringArray) -> void:
 	$Gift.chat(arg_ary.join(", "))
 
 func Spores(cmd_info : CommandInfo) -> void:
-	var SporeNo = String(floor(SporeN.sporeNum))
+	var SporeNo = String(floor($SporeTimer.sporeNum))
 	$Gift.chat("Spores Released " + SporeNo)
 	print("Spores Released " + SporeNo)
+	$SporeTimer.sporeNum = 0
+
+func Join(cmd_info : CommandInfo) -> void:
+	var img = ImageCache.new(false, "user://gift/cache")
+	img.RequestType.PROFILE
+	

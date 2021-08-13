@@ -29,11 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gift/util/image_cache.gd"
 }, {
-"base": "Button",
-"class": "Loaded",
-"language": "GDScript",
-"path": "res://Script/GDscript/LoadPreviousInput.gd"
-}, {
 "base": "Reference",
 "class": "SenderData",
 "language": "GDScript",
@@ -54,7 +49,6 @@ _global_script_class_icons={
 "CommandInfo": "",
 "Gift": "",
 "ImageCache": "",
-"Loaded": "",
 "SenderData": "",
 "SporeCount": "",
 "Username": ""

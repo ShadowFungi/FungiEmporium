@@ -9,7 +9,7 @@ func _ready() -> void:
 	# <oauth token>
 	# <initial channel>
 	var authfile := File.new()
-	authfile.open("./auth.txt", File.READ)
+	authfile.open("./auth", File.READ)
 	var botname := authfile.get_line()
 	var token := authfile.get_line()
 	var initial_channel := authfile.get_line()
@@ -51,6 +51,8 @@ func _ready() -> void:
 	add_command("list", get_parent(), "list", -1, 2)
 	
 	add_command("spores", get_parent(), "Spores")
+	
+	add_command("join", get_parent(), "Join")
 
 	# Adds a command alias
 	add_alias("test","test1")

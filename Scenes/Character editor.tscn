@@ -107,7 +107,6 @@ __meta__ = {
 
 [node name="Camera2DTall" type="Camera2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 0, 0.000183105 )
-scale = Vector2( 1, 1 )
 anchor_mode = 0
 current = true
 drag_margin_left = 0.8
