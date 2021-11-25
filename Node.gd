@@ -35,7 +35,16 @@ func Spores(cmd_info : CommandInfo) -> void:
 	print("Spores Released " + SporeNo)
 	$SporeTimer.sporeNum = 0
 
-func Join(cmd_info : CommandInfo) -> void:
+func Join(cmd_info : CommandInfo):
 	var img = ImageCache.new(false, "user://gift/cache")
-	img.RequestType.PROFILE
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.connect("request_completed", self, "_http_request_completed")
 	
+	var error = http_request.request("https://api.twitch.tv/helix/users?login=" + cmd_info.sender_data.user, ["Authorization: Bearer 72fspolhaclaeo2wczzmydxa2fj0vf", "Client-Id: d4htp1qv7dc7v6y8k4v4iz3gnllm8w"])
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+func _http_request_completed(result, response_code, headers, body):
+	var response = parse_json(body.get_string_from_utf8())
+	print(response.keys())

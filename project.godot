@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gift/util/image_cache.gd"
 }, {
+"base": "Button",
+"class": "Loaded",
+"language": "GDScript",
+"path": "res://Script/GDscript/LoadPreviousInput.gd"
+}, {
 "base": "Reference",
 "class": "SenderData",
 "language": "GDScript",
@@ -49,6 +54,7 @@ _global_script_class_icons={
 "CommandInfo": "",
 "Gift": "",
 "ImageCache": "",
+"Loaded": "",
 "SenderData": "",
 "SporeCount": "",
 "Username": ""
@@ -61,7 +67,7 @@ run/main_scene="res://Scenes/SendMsgFromBot.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="FungiEmporium"
 run/low_processor_mode=true
-boot_splash/fullsize=false
+boot_splash/image="res://Images/BootSplash.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 config/icon="res://Images/Sprites/Buttons/ArrowButton.png"

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Script/GDscript/Gift/Button.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/CascadiaCode.tres" type="DynamicFont" id=2]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchor_top = 2.53333
+anchor_right = 1.74063
+anchor_bottom = 2.75556
+margin_top = -455.999
+margin_right = -233.002
+margin_bottom = -472.001
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_right = 273.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 273, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Bot Message"
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 277.0
+margin_right = 324.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 47, 24 )
+custom_fonts/font = ExtResource( 2 )
+text = "Send"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}

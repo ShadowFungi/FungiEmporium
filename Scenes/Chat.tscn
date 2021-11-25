@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/GDscript/Gift/ChatContainer.gd" type="Script" id=1]
+
+[node name="ChatContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.844444
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Chat" type="Panel" parent="."]
+show_behind_parent = true
+margin_right = 320.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Chat"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+follow_focus = true
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChatMessagesContainer" type="VBoxContainer" parent="Chat/ScrollContainer"]
+margin_right = 300.0
+margin_bottom = 131.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
